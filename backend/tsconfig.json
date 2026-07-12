@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* File Layout & Directories */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Modules & Environment */
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    
+    /* Strict Rules & Typings */
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    
+    /* Quality of Life Guardrails */
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "sourceMap": true
+  },
+  "include": ["src/**/*", "prisma.config.ts"]
+}
