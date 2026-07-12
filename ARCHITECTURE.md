@@ -10,6 +10,7 @@ SEMS is a specialized, web-centric platform designed to manage the full lifecycl
 *   **Real-time Layer:** Socket.IO (WebSockets).
 
 ## 3. High-Level System Architecture
+~~~
 
 ┌────────────────────────────────────────────────────────┐
 │                   Client Layer (React)                 │
@@ -34,6 +35,8 @@ SEMS is a specialized, web-centric platform designed to manage the full lifecycl
     │Store      │                                   │ Live Cache│
     │(Postgres) │                                   │  (Redis)  │
     └───────────┘                                   └───────────┘
+~~~
+
     ## 4. Core Design Patterns & Guardrails
 
 ### 4.1. Dynamic "Role-Per-Event" RBAC (FR-2.1 / FR-2.2)
