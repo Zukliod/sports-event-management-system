@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  ORGANIZER
+  ATTENDEE
+}
+
+enum EventRole {
+  SUPER_ADMIN
+  EVENT_ADMIN
+  SPORT_COORDINATOR
+  PARTICIPANT
+}
+
+model User {
+  id              Int               @id @default(autoincrement())
+  name            String
+  email           String            @unique
+  role            Role              @default(ATTENDEE)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  registrations   Registration[]
+  roleAssignments RoleAssignment[]
+}
+
+model Event {
+  id              Int               @id @default(autoincrement())
+  title           String
+  description     String
+  date            DateTime
+  venue           String
+  maxParticipants Int
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  registrations   Registration[]
+  roleAssignments RoleAssignment[]
+}
+
+model Registration {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  eventId   Int
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+}
+
+model RoleAssignment {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  eventId   Int
+  role      EventRole @default(PARTICIPANT)
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+}
